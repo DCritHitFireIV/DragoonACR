@@ -1,0 +1,20 @@
+﻿using AEAssist.CombatRoutine.Module;
+using AEAssist.Helper;
+using FireIV.src.Data;
+
+namespace FireIV.src.SlotResolvers.oGCD
+{
+    public class SlotResolver_oGCD_幻象冲 : DragoonSlotResolver
+    {
+        protected override int CheckInner()
+        {
+            if (!DragoonSpells.幻象冲.GetSpell().IsReadyWithCanCast())
+                return -1;
+            return 0;
+        }
+        public override void Build(Slot slot)
+        {
+            slot.Add(DragoonSpells.幻象冲.GetSpell());
+        }
+    }
+}

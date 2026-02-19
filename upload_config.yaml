@@ -1,0 +1,11 @@
+#ACR介绍
+Remark: 龙骑炒股自用，很电
+#支持的职业
+SupportJobs:
+  - 龙骑士
+#支持链接
+SupportUrl: https://afdian.com/a/fireiv
+#问题反馈链接
+ReportUrl: 改成一个HTTP://或者HTTPS://开头的链接
+#是否国际服版本
+EnVersion: false
