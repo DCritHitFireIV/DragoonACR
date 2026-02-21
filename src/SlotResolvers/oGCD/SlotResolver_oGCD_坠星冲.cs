@@ -1,6 +1,9 @@
-﻿using AEAssist.CombatRoutine.Module;
+﻿using AEAssist;
+using AEAssist.CombatRoutine.Module;
 using AEAssist.Helper;
+using AEAssist.MemoryApi;
 using FireIV.src.Data;
+using FireIV.src.State;
 
 namespace FireIV.src.SlotResolvers.oGCD
 {
@@ -10,10 +13,10 @@ namespace FireIV.src.SlotResolvers.oGCD
         {
             // 单插独占窗口
             if (!DragoonSpells.坠星冲.GetSpell().IsReadyWithCanCast())
-                return -1;
-            if (AI.Instance.BattleData.CurrGcdAbilityCount != 2)
-                return -1;
-            return 0;
+                return (int)CheckResult.NotReady;
+            if (DragoonState.Instance.GetElapsedGCD > 800)
+                return (int)CheckResult.OGcdNotAligned;
+            return (int)CheckResult.Ok;
         }
         public override void Build(Slot slot)
         {

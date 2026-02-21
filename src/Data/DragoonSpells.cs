@@ -28,7 +28,7 @@
         public const uint 龙剑 = 83u;
         public const uint 猛枪 = 85u;
         public const uint 高跳 = 16478u;
-        public const uint 幻象冲 = 7399;
+        public const uint 幻象冲 = 7399u;
         public const uint 回避跳跃 = 94u;
         public const uint 龙翼滑翔 = 36951u;
         public const uint 龙炎冲 = 96u;

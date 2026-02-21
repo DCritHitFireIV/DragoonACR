@@ -1,10 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AEAssist.CombatRoutine.Module;
+using AEAssist.Helper;
+using FireIV.src.Data;
+using FireIV.src.State;
 
 namespace FireIV.src.SlotResolvers.oGCD
 {
-    internal class SlotResolver_oGCD_天龙点睛_即将过期
+    public class SlotResolver_oGCD_天龙点睛_即将过期 : DragoonSlotResolver
     {
+        protected override int CheckInner()
+        {
+            if (!DragoonSpells.天龙点睛.GetSpell().IsReadyWithCanCast())
+                return (int)CheckResult.NotReady;
+            if (DragoonState.Instance.GetElapsedGCD > 1800)
+                return (int)CheckResult.GcdWindowPassed;
+            //if()
+            return (int)CheckResult.Ok;
+        }
+        public override void Build(Slot slot)
+        {
+            slot.Add(DragoonSpells.天龙点睛.GetSpell());
+        }
     }
 }

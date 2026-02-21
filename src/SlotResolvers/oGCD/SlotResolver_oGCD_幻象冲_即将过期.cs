@@ -1,6 +1,7 @@
 ﻿using AEAssist.CombatRoutine.Module;
 using AEAssist.Helper;
 using FireIV.src.Data;
+using FireIV.src.State;
 
 namespace FireIV.src.SlotResolvers.oGCD
 {
@@ -9,9 +10,12 @@ namespace FireIV.src.SlotResolvers.oGCD
         protected override int CheckInner()
         {
             if (!DragoonSpells.幻象冲.GetSpell().IsReadyWithCanCast())
-                return -1;
-            //if ()
-            return 0;
+                return (int)CheckResult.NotReady;
+            if (DragoonState.Instance.GetElapsedGCD > 1800)
+                return (int)CheckResult.GcdWindowPassed;
+            if (BuffState.Instance.MirageDiveTimeLeftMs > 700)
+                return (int)CheckResult.DurationTooLong;
+            return (int)CheckResult.Ok;
         }
         public override void Build(Slot slot)
         {

@@ -1,8 +1,11 @@
-﻿using AEAssist.CombatRoutine.Module;
+﻿using AEAssist;
+using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
+using AEAssist.MemoryApi;
 using FireIV.src.Data;
 using FireIV.src.State;
+using static FireIV.src.State.DragoonState;
 
 
 namespace FireIV.src.SlotResolvers.GCD
@@ -15,6 +18,8 @@ namespace FireIV.src.SlotResolvers.GCD
         protected override int CheckInner()
         {
             var state = DragoonState.Instance;
+            if (state.CurrentGCDRoute != DragoonGCDRoute.Thrust)
+                return -1;
             //if ((state.GetDistanceFromMe > DragoonState.ActionRangeMap[DragoonSpells.精准刺])) 
             //    return -1;
             return 0;
@@ -32,7 +37,8 @@ namespace FireIV.src.SlotResolvers.GCD
                 DragoonSpells.云蒸龙变 => DragoonSpells.精准刺,
                 _ => DragoonSpells.精准刺
             };
-            slot.Add(spell.GetSpell());
+            var realspell = Core.Resolve<MemApiSpell>().CheckActionChange(spell);
+            slot.Add(realspell.GetSpell());
         }
     }
 }

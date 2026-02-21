@@ -22,6 +22,8 @@ namespace FireIV.src.State
         public bool HasBattleLitany { get; private set; }
         public int LanceChargeTimeLeftMs { get; private set; }
         public int BattleLitanyTimeLeftMs { get; private set; }
+        public bool HasLifeSurgeBuff { get; private set; }
+        public int MirageDiveTimeLeftMs { get; private set; }
 
         public void Update()
         {
@@ -46,6 +48,12 @@ namespace FireIV.src.State
             HasBattleLitany = _buff.HasAura(me, DragoonSpells.Buff.战斗连祷, 0);
             BattleLitanyTimeLeftMs = HasBattleLitany
                 ? _buff.GetAuraTimeleft(me, DragoonSpells.Buff.战斗连祷, true)
+                : 0;
+            // ===== 龙剑 =====
+            HasLanceCharge = _buff.HasAura(me, DragoonSpells.Buff.龙剑, 0);
+            // ===== 幻象冲预备 =====
+            MirageDiveTimeLeftMs = _buff.HasAura(me, DragoonSpells.Buff.幻象冲预备, 0)
+                ? _buff.GetAuraTimeleft(me, DragoonSpells.Buff.幻象冲预备, true)
                 : 0;
         }
     }

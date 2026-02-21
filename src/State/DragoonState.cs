@@ -21,7 +21,7 @@ namespace FireIV.src.State
         private readonly MemApiSpellCastSuccess _castSuccess = Core.Resolve<MemApiSpellCastSuccess>();
 
         private long _lastUpdate;
-        private const int UpdateInterval = 100; // ms
+        private const int UpdateInterval = 20; // ms
         /// <summary>
         /// 目标接口，是否存在目标以及目标是否可攻击
         /// SpellId接口，获取最新使用的成功连击技能Id和技能Id
@@ -33,7 +33,7 @@ namespace FireIV.src.State
         public uint GetLastSpellId { get; private set; }
         private DragoonGCDRoute _gcdRoute = DragoonGCDRoute.Chaos;
         public DragoonGCDRoute CurrentGCDRoute { get; private set; }
-
+        public int GetElapsedGCD { get; private set; }
         public void Update()
         {
             var now = Environment.TickCount64;
@@ -49,6 +49,7 @@ namespace FireIV.src.State
             GetLastComboSpellId = _spell.GetLastComboSpellId();
             GetLastSpellId = _castSuccess.LastGcd;
             CurrentGCDRoute = UpdateGCDRoute();
+            GetElapsedGCD = _spell.GetElapsedGCD();
         }
 
         public enum DragoonGCDRoute

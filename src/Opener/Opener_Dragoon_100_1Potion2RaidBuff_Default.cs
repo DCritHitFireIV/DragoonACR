@@ -29,7 +29,7 @@ namespace FireIV.src.Opener
             // ===============================
             // GCD 
             // ===============================
-            if (Core.Resolve<MemApiSpellCastSuccess>().LastGcd == 0)
+            //if (Core.Resolve<MemApiSpellCastSuccess>().LastGcd == 0)
                 slot.Add(DragoonSpells.精准刺.GetSpell());
             // ===============================
             // Off-GCD

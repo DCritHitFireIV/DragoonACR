@@ -1,6 +1,8 @@
-﻿using AEAssist.CombatRoutine.Module;
+﻿using AEAssist;
+using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
+using AEAssist.MemoryApi;
 using FireIV.src.Data;
 using FireIV.src.State;
 using static FireIV.src.State.DragoonState;
@@ -35,7 +37,8 @@ namespace FireIV.src.SlotResolvers.GCD
                 DragoonSpells.云蒸龙变 => DragoonSpells.精准刺,
                 _ => DragoonSpells.精准刺
             };
-            slot.Add(spell.GetSpell());
+            var realspell = Core.Resolve<MemApiSpell>().CheckActionChange(spell);
+            slot.Add(realspell.GetSpell());
         }
     }
 }
